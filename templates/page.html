@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Result</title>
+  <!-- Import jquery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <!-- Import Bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+  <h3 style="margin-top:70px">Article title: <span id="title">{{name}}</span></h3>
+    
+  <p id="output">Loading...</p>
+</div>
+</div>
+</body>
+<script>
+  console.log('1');
+  function handleResult(d) {
+    console.log('3',d);
+    let output = document.getElementById("output");
+    txt = d.query.pages[Object.keys(d.query.pages)[0]].extract
+    output.innerHTML = txt
+    
+  }
+
+  setTimeout(() => {
+    articleName = document.getElementById('title')
+    console.log(articleName.innerHTML);
+    $.getJSON(`https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro&titles=${articleName.textContent}&format=json&callback=?`, handleResult)
+  }, 1000)
+console.log('2');
+</script>
+</html>
